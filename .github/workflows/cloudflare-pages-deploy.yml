@@ -1,0 +1,22 @@
+name: 部署到Cloudflare Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: 部署
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 部署到Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: cbbc51ba3a26e9a20e689a6cc49f9218
+          projectName: zhihuishu-language-app
+          directory: .
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
